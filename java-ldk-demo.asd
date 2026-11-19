@@ -14,7 +14,10 @@
   :properties
   ;; serapeum (via OpenLDK) depends on iterate. Client 0.23 leaves a
   ;; non-registry copy in place. :with force-installs the GHCR package.
-  (:cl-repo (:ci (:with ("iterate")))))
+  ;; trivia.balland2006 needs type-i. The dep walk only reaches it through
+  ;; openldk/interop, which is feature-excluded on Windows, yet trivia is
+  ;; still loaded there: install type-i as a root.
+  (:cl-repo (:ci (:with ("iterate" "type-i")))))
 
 (defsystem "java-ldk-demo/tests"
   :depends-on ("java-ldk-demo" "rove")
